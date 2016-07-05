@@ -50,4 +50,64 @@ class User
 
         }
 
+    public function createTeamLead($conn){              //methods for create team leader accounts
+
+        $fname=$_POST["fname"];         //assign variables
+        $lname=$_POST["lname"];
+        $nic=$_POST["nic"];
+        $pwd=$_POST["pwd"];
+        $email=$_POST["email"];
+        $phone=$_POST["pnumber"];
+        $join_date=date("Y/m/d h:i:sa");
+        $age=$_POST["age"];
+        $postal_code=$_POST['postal_code'];
+        $address=$_POST['address'];
+        $user_image=$_POST['user_image'];
+
+        $sql="SELECT libraryid FROM library";                //select count of the library
+        //$result=mysqli_query($conn,$sql);
+        $num_of_rows_library=mysqli_num_rows(mysqli_query($conn,$sql));
+
+
+        function generateLibraryId($postal_code,$num_of_rows){   //generate unique library id
+
+            $count=1000+$num_of_rows++;
+            return "RB-LB".$count.'-'.$postal_code;
+        }
+
+        $library_id=generateLibraryId($postal_code,$num_of_rows_library);
+
+        $sql="SELECT * FROM teamleader WHERE NIC='$nic'";
+        $result=mysqli_query($conn,$sql);
+
+        if(mysqli_num_rows($result)==0){
+
+            $sql_insert="INSERT INTO teamleader VALUES ('$nic','$fname','$lname','$address','$email','$phone','$pwd','$age',1,'$join_date','$postal_code','$user_image')";
+
+            $sql_insert_library="INSERT INTO library VALUES('$library_id','$postal_code','$address','$join_date','$nic')";
+
+            if(mysqli_query($conn,$sql_insert)&&mysqli_query($conn,$sql_insert_library)){
+
+                $data=array(                    //successfully account created alert
+                    "query_result"=>1,
+                    "NIC"=>$nic,
+                    "name"=>$fname,
+                    "libaray_id"=>$library_id,
+                    "address"=>$address,
+                    "user_image"=>$user_image
+                );
+            }
+            else{
+
+                $data=array("query_result"=>2);  //account create error alert
+            }
+        }
+        else{
+
+            $data=array("query_result"=>3);//team leader existing error
+        }
+
+        return $data;
+    }
+
 }

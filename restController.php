@@ -15,9 +15,13 @@ if(isset($_GET['action'])){
     $action=$_GET['action'];
 
     switch($action){
-        case "userLogin":
+        case "userLogin":                       //for user login into the system
             $restHandler= new RestHandler();
             $restHandler->userLogin($conn);
+            break;
+        case "createTeamLead":                  //for create Team Leader Account
+            $restHandler=new RestHandler();
+            $restHandler->createTeamLeader($conn);
             break;
     }
 }

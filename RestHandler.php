@@ -14,12 +14,12 @@ class RestHandler extends SimpleRest
 {
     function userLogin($conn){
 
-        $userLogin=new User();
-        $rawData=$userLogin->userLogin($conn);
+        $user=new User();
+        $rawData=$user->userLogin($conn);
 
         if(empty($rawData)){
             $statusCode = 404;
-            $rawData = array('error' => 'No users Find');
+            $rawData = array("query_result"=>"0");
         }
         else{
             $statusCode = 200;
@@ -38,6 +38,36 @@ class RestHandler extends SimpleRest
             $response = $this->encodeXml($rawData);
             echo $response;
         }
+
+    }
+
+    function createTeamLeader($conn){
+
+        $user=new User();
+        $rawData=$user->createTeamLead($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
 
     }
 
