@@ -6,7 +6,7 @@
  * Time: 12:00 PM
  */
 
-require_once "user_api.php";
+require_once "RestHandler.php";
 require_once "connection.php";
 
 $action="";
@@ -16,7 +16,8 @@ if(isset($_GET['action'])){
 
     switch($action){
         case "userLogin":
-            userLogin($conn);
+            $restHandler= new RestHandler();
+            $restHandler->userLogin($conn);
             break;
     }
 }
