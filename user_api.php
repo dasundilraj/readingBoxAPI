@@ -7,30 +7,30 @@
  */
 include_once "connection.php";
 
-if(isset($_GET['action'])){
-
-    $action=$_GET['action'];
-
-    switch($action){
-
-        case "userLogin":
-            userLogin($conn);
-            break;
-        case "createTeamLeader":
-            createTeamLeader($conn);
-            break;
-        case "getALLTeamLeaders":
-            getALLTeamLeaders($conn);
-            break;
-        case "deleteTeamLeader":
-            deleteTeamLeader($conn);
-            break;
-        case "getTeamLeader":
-            getTeamLeader($conn);
-            break;
-
-    }
-}
+//if(isset($_GET['action'])){
+//
+//    $action=$_GET['action'];
+//
+//    switch($action){
+//
+//        case "userLogin":
+//            userLogin($conn);
+//            break;
+//        case "createTeamLeader":
+//            createTeamLeader($conn);
+//            break;
+//        case "getALLTeamLeaders":
+//            getALLTeamLeaders($conn);
+//            break;
+//        case "deleteTeamLeader":
+//            deleteTeamLeader($conn);
+//            break;
+//        case "getTeamLeader":
+//            getTeamLeader($conn);
+//            break;
+//
+//    }
+//}
 
 /***********************************************************************************************************************
  ***************************FUNCTION LOGIN USERS TO SYSTEM(GET)*********************************************************
@@ -38,44 +38,46 @@ if(isset($_GET['action'])){
 
 function userLogin($conn){
 
-    $userName=$_POST['user_id'];
-    $password=$_POST['user_pwd'];
+    echo "Test";
 
-    $sql="SELECT * FROM teamleader WHERE NIC='$userName' && pwd='$password'";
-    $result=mysqli_query($conn,$sql);
-    $row=mysqli_fetch_array($result);
-
-    if((mysqli_num_rows($result)!=0)&&($row['attribute']==0)){
-
-        $data=array(                //json object for main admin
-            "query_result"=>"1",
-            "attribute"=>"0",
-            "user_NIC"=>$row['NIC'],
-            "user_fname"=>$row['firstname']
-        );
-    }
-
-    else if((mysqli_num_rows($result)!=0)&&($row['attribute']==1)){
-
-        $sql="SELECT libraryid FROM library WHERE teamleader_NIC='$userName'";
-        $row_lib=mysqli_fetch_array(mysqli_query($conn,$sql));
-
-        $data=array(                //json object for Team Leader
-            "query_result"=>"1",
-            "attribute"=>"1",
-            "user_NIC"=>$row['NIC'],
-            "user_fname"=>$row['firstname'],
-            "user_image"=>$row['user_image'],
-            "Library_id"=>$row_lib['libraryid']
-        );
-    }
-    else{
-        $data=array("query_result"=>"0");                   //json object for Error request
-    }
-
-    $json=$data;
-    header('content-type: application/json');
-    echo json_encode($json);
+//    $userName=$_POST['user_id'];
+//    $password=$_POST['user_pwd'];
+//
+//    $sql="SELECT * FROM teamleader WHERE NIC='$userName' && pwd='$password'";
+//    $result=mysqli_query($conn,$sql);
+//    $row=mysqli_fetch_array($result);
+//
+//    if((mysqli_num_rows($result)!=0)&&($row['attribute']==0)){
+//
+//        $data=array(                //json object for main admin
+//            "query_result"=>"1",
+//            "attribute"=>"0",
+//            "user_NIC"=>$row['NIC'],
+//            "user_fname"=>$row['firstname']
+//        );
+//    }
+//
+//    else if((mysqli_num_rows($result)!=0)&&($row['attribute']==1)){
+//
+//        $sql="SELECT libraryid FROM library WHERE teamleader_NIC='$userName'";
+//        $row_lib=mysqli_fetch_array(mysqli_query($conn,$sql));
+//
+//        $data=array(                //json object for Team Leader
+//            "query_result"=>"1",
+//            "attribute"=>"1",
+//            "user_NIC"=>$row['NIC'],
+//            "user_fname"=>$row['firstname'],
+//            "user_image"=>$row['user_image'],
+//            "Library_id"=>$row_lib['libraryid']
+//        );
+//    }
+//    else{
+//        $data=array("query_result"=>"0");                   //json object for Error request
+//    }
+//
+//    $json=$data;
+//    header('content-type: application/json');
+//    echo json_encode($json);
 
 
 }
