@@ -12,7 +12,7 @@ require_once "User.php";
 
 class RestHandler extends SimpleRest
 {
-    function userLogin($conn){
+    function userLogin($conn){                  //user login function return response
 
         $user=new User();
         $rawData=$user->userLogin($conn);
@@ -41,10 +41,40 @@ class RestHandler extends SimpleRest
 
     }
 
-    function createTeamLeader($conn){
+    function createTeamLeader($conn){           //function team leader create and return response
 
         $user=new User();
         $rawData=$user->createTeamLead($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+
+    }
+
+    function viewTeamLead($conn){               //function view team lead account and return response
+
+        $user=new User();
+        $rawData=$user->viewTeamLead($conn);
 
         if(empty($rawData)){
             $statusCode = 404;

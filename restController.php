@@ -23,6 +23,11 @@ if(isset($_GET['action'])){
             $restHandler=new RestHandler();
             $restHandler->createTeamLeader($conn);
             break;
+        case "viewTeamLead":
+            $restHandler= new RestHandler();
+            $restHandler->viewTeamLead($conn);
+            break;
+
     }
 }
 
