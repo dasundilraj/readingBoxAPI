@@ -142,6 +142,91 @@ class RestHandler extends SimpleRest
 
     }
 
+    function addBookOtherDetails($conn){
+
+        $book= new Book();
+        $rawData=$book->addBookOtherDetails($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+    }
+
+    function listOFBookIDNotUpdated($conn){
+
+        $book= new Book();
+        $rawData=$book->listOFBookIDNotUpdated($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+    }
+
+    function libraryALLBookData($conn){
+
+        $book=new Book();
+        $rawData=$book->libraryALLBookData($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
+
 
 
 
