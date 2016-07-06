@@ -110,4 +110,28 @@ class User
         return $data;
     }
 
+    public function viewTeamLead($conn){            //function for view user accounts
+        //NIC, firstname, lastname, address, email, phone, pwd, age, attribute, joindate, postalcode, user_image
+        $sql="SELECT * FROM teamleader WHERE attribute='1' ORDER BY joindate DESC";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data[]=array(
+                "fname"=>$row['firstname'],
+                "lname"=>$row['lastname'],
+                "NIC"=>$row['NIC'],
+                "phone"=>$row['phone'],
+                "email"=>$row['email'],
+                "postal_code"=>$row['postalcode'],
+                "pwd"=>$row['pwd'],
+                "age"=>$row['age'],
+                "address"=>$row['address'],
+                "join_date"=>$row['joindate'],
+                "user_image"=>$row['user_image']
+            );
+        }
+
+        return $data;
+    }
+
 }
