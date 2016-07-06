@@ -15,18 +15,38 @@ if(isset($_GET['action'])){
     $action=$_GET['action'];
 
     switch($action){
-        case "userLogin":                       //for user login into the system
+
+        //cases for users
+        case "userLogin":                       //for user login into the system for both users
             $restHandler= new RestHandler();
             $restHandler->userLogin($conn);
             break;
-        case "createTeamLead":                  //for create Team Leader Account
+        case "createTeamLead":                  //for create Team Leader Account in main admin view
             $restHandler=new RestHandler();
             $restHandler->createTeamLeader($conn);
             break;
-        case "viewTeamLead":
+        case "viewTeamLead":                    //for view Team Leader Accounts in main admin view
             $restHandler= new RestHandler();
             $restHandler->viewTeamLead($conn);
             break;
+
+        //cases for books
+        case "addBooks":                        //for add basic book details in main admin view
+            $restHandler=new RestHandler();
+            $restHandler->addBooks($conn);
+            break;
+
+        //cases for library
+        case "listOfLibraryId":
+            $restHandler= new RestHandler();
+            $restHandler->listOfLibraryId($conn);
+            break;
+        case "libraryData":
+            $restHandler= new RestHandler();
+            $restHandler->libraryData($conn);
+            break;
+
+
 
     }
 }

@@ -4,8 +4,16 @@ RewriteEngine on
 
 # map neat URL to internal URL
 
+#for users
 RewriteRule ^userlogin/$ RestController.php?action=userLogin [nc,qsa]
 RewriteRule ^createTeamLead/$ RestController.php?action=createTeamLead [nc,qsa]
 RewriteRule ^viewTeamLead/$ RestController.php?action=viewTeamLead [nc,qsa]
+
+#for books
+RewriteRule ^addBooks/$ RestController.php?action=addBooks [nc,qsa]
+
+#for Library
+RewriteRule ^listOfLibraryId/$ RestController.php?action=listOfLibraryId [nc,qsa]
+RewriteRule ^libraryData/$ RestController.php?action=libraryData [nc,qsa]
 
 #RewriteRule ^mobile/list/([0-9]+)/$   RestController.php?view=single&id=$1 [nc,qsa]

@@ -9,9 +9,16 @@
 
 require_once "SimpleRest.php";
 require_once "User.php";
+require_once "Book.php";
+require_once "Library.php";
 
 class RestHandler extends SimpleRest
 {
+
+
+
+    /***************<<<<<<< Functions for USERS >>>>>>>>*********************/
+
     function userLogin($conn){                  //user login function return response
 
         $user=new User();
@@ -100,6 +107,106 @@ class RestHandler extends SimpleRest
 
 
     }
+
+
+
+
+    /***************<<<<<<< Functions for BOOKS >>>>>>>>*********************/
+
+    function addBooks($conn){                           //function add book basic details in main admin view
+
+        $book= new Book();
+        $rawData=$book->addBookBasicDetails($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
+
+
+
+
+    /***************<<<<<<< Functions for LIBRARY >>>>>>>>*********************/
+
+    function listOfLibraryId($conn){                    //function get list of library ids
+
+        $library=new Library();
+        $rawData=$library->getListOfLibraryID($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
+
+    function libraryData($conn){                            //function for get library data
+        $library=new Library();
+        $rawData=$library->getLibraryData($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+    }
+
+
+
+
+    /***************<<<<<<< Functions for RESPONSE ENCODE >>>>>>>>*********************/
 
     public function encodeHtml($responseData) {                         //convert return data into HTML
 
