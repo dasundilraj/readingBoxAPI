@@ -11,6 +11,9 @@ RewriteRule ^viewTeamLead/$ RestController.php?action=viewTeamLead [nc,qsa]
 
 #for books
 RewriteRule ^addBooks/$ RestController.php?action=addBooks [nc,qsa]
+RewriteRule ^addBooksTeamLead/$ RestController.php?action=addBooksTeamLead [nc,qsa]
+RewriteRule ^listOFBookIDNotUpdated/$ RestController.php?action=listOFBookIDNotUpdated [nc,qsa]
+RewriteRule ^libraryALLBookData/$ RestController.php?action=libraryALLBookData [nc,qsa]
 
 #for Library
 RewriteRule ^listOfLibraryId/$ RestController.php?action=listOfLibraryId [nc,qsa]

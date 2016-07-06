@@ -48,4 +48,65 @@ class Book
 
         return $data;
     }
+
+    public function addBookOtherDetails($conn){                         //update other details of the book by Team Leader
+
+        $book_id=$_POST['book_id'];
+        $title=$_POST['title'];
+        $book_category=$_POST['book_category'];
+        $author=$_POST['author'];
+        $pub_date=$_POST['published_date'];
+
+        $sql="UPDATE book SET title='$title',book_category='$book_category', author_name='$author',publishdate='$pub_date',updated='1'
+                      WHERE bookid='$book_id' ";
+
+        if(mysqli_query($conn,$sql)){
+            $data=array("query_result"=>"1");
+        }
+        else{
+            $data=array("query_result"=>"0");
+        }
+
+        return $data;
+
+    }
+
+    public function listOFBookIDNotUpdated($conn){                              //get list of book ids which are not updated
+
+        $library_id=$_POST['library_id'];
+
+        $sql="SELECT bookid FROM book WHERE library_libraryid='$library_id' AND updated='0'";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data[]=array("book_id"=>$row['bookid']);
+        }
+        return $data;
+    }
+
+    public function libraryALLBookData($conn){                  //get all book data in library
+
+        $library_id=$_POST['library_id'];
+
+        $sql="SELECT * FROM book WHERE library_libraryid='$library_id' ORDER BY added_date DESC ";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data[]=array(
+                "bookid"=>$row['bookid'],
+                "ISBN"=>$row['ISBN'],
+                "title"=>$row['title'],
+                "book_category"=>$row['book_category'],
+                "author"=>$row['author_name'],
+                "publishdate"=>$row['publishdate'],
+                "donor_name"=>$row['donor_name'],
+                "donatedate"=>$row['donatedate'],
+                "price"=>$row['price'],
+                "status"=>$row['status']
+            );
+        }
+        return $data;
+    }
+
+
 }

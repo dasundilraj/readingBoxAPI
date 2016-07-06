@@ -35,13 +35,25 @@ if(isset($_GET['action'])){
             $restHandler=new RestHandler();
             $restHandler->addBooks($conn);
             break;
+        case "addBooksTeamLead":                //for add other details of the book in team leader view
+            $restHandler=new RestHandler();
+            $restHandler->addBookOtherDetails($conn);
+            break;
+        case "listOFBookIDNotUpdated":          //for get list of book IDS which are not updated by Team Leader
+            $restHandler= new RestHandler();
+            $restHandler->listOFBookIDNotUpdated($conn);
+            break;
+        case "libraryALLBookData":
+            $restHandler= new RestHandler();
+            $restHandler->libraryALLBookData($conn);
+            break;
 
         //cases for library
-        case "listOfLibraryId":
+        case "listOfLibraryId":                 //for get list of library id in main admin view
             $restHandler= new RestHandler();
             $restHandler->listOfLibraryId($conn);
             break;
-        case "libraryData":
+        case "libraryData":                     //for get list of library data in main admin view
             $restHandler= new RestHandler();
             $restHandler->libraryData($conn);
             break;
