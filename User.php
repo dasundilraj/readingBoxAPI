@@ -134,4 +134,31 @@ class User
         return $data;
     }
 
+    public function getTeamLeader($conn)            //for get team leader date in Team leader edit profile
+    {
+
+        $team_lead_id = $_POST['team_lead_id'];
+
+        $sql = "SELECT * FROM teamleader WHERE NIC='$team_lead_id'";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result)) {
+            $data = array(
+                "fullName" => $row['firstname'] . " " . $row['lastname'],
+                "firstname" => $row['firstname'],
+                "lastname" => $row['lastname'],
+                "address" => $row['address'],
+                "email" => $row['email'],
+                "phone" => $row['phone'],
+                "age" => $row['age'],
+                "pwd" => $row['pwd'],
+                "NIC" => $row['NIC'],
+                "postalcode" => $row['postalcode'],
+                "user_image" => $row['user_image']
+
+            );
+        }
+        return $data;
+    }
+
 }

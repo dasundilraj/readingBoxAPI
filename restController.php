@@ -29,6 +29,10 @@ if(isset($_GET['action'])){
             $restHandler= new RestHandler();
             $restHandler->viewTeamLead($conn);
             break;
+        case "getTeamLeader":                   //for get team leader data in team leader edit profile view
+            $restHandler= new RestHandler();
+            $restHandler->getTeamLeader($conn);
+            break;
 
         //cases for books
         case "addBooks":                        //for add basic book details in main admin view
@@ -75,6 +79,14 @@ if(isset($_GET['action'])){
             $restHandler=new RestHandler();
             $restHandler->viewMemberTeamLead($conn);
             break;
+        case "listOfMemberID":                  //for get list of member id in team leader view
+            $restHandler= new RestHandler();
+            $restHandler->listOfMemberID($conn);
+            break;
+        case "memberData":
+            $restHandler= new RestHandler();
+            $restHandler->getMemberData($conn);
+            break;
 
         //cases for sales
         case "addBookSales":                    //for add book sales details into the system in team leader  view
@@ -88,7 +100,18 @@ if(isset($_GET['action'])){
 
 
         //cases for transactions
-
+        case "addTransaction":                  //for add transaction in team leader view
+            $restHandler= new RestHandler();
+            $restHandler->addTransaction($conn);
+            break;
+        case "viewTransaction":                 //for view transaction details
+            $restHandler= new RestHandler();
+            $restHandler->viewTransaction($conn);
+            break;
+        case "returnBook":
+            $restHandler= new RestHandler();
+            $restHandler->returnBook($conn);
+            break;
     }
 }
 
