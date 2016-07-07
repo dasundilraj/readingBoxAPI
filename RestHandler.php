@@ -11,6 +11,7 @@ require_once "SimpleRest.php";
 require_once "User.php";
 require_once "Book.php";
 require_once "Library.php";
+require_once "Member.php";
 
 class RestHandler extends SimpleRest
 {
@@ -288,6 +289,66 @@ class RestHandler extends SimpleRest
         }
     }
 
+
+
+    /***************<<<<<<< Functions for Member >>>>>>>>*********************/
+
+    function addMember($conn){                  //function for add members in team leader view
+
+        $member=new Member();
+        $rawData=$member->addMember($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+    }
+
+    function viewMemberTeamLead($conn){         //function for view members who are related to the team leader view
+
+        $member = new Member();
+        $rawData=$member->viewMembersTeamLead($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
 
 
 
