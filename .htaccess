@@ -8,6 +8,7 @@ RewriteEngine on
 RewriteRule ^userlogin/$ RestController.php?action=userLogin [nc,qsa]
 RewriteRule ^createTeamLead/$ RestController.php?action=createTeamLead [nc,qsa]
 RewriteRule ^viewTeamLead/$ RestController.php?action=viewTeamLead [nc,qsa]
+RewriteRule ^getTeamLeader/$ RestController.php?action=getTeamLeader [nc,qsa]
 
 #for books
 RewriteRule ^addBooks/$ RestController.php?action=addBooks [nc,qsa]
@@ -24,9 +25,14 @@ RewriteRule ^libraryData/$ RestController.php?action=libraryData [nc,qsa]
 #for members
 RewriteRule ^addMember/$ RestController.php?action=addMember [nc,qsa]
 RewriteRule ^viewMembersTeamLead/$ RestController.php?action=viewMembersTeamLead [nc,qsa]
+RewriteRule ^listOfMemberID/$ RestController.php?action=listOfMemberID [nc,qsa]
+RewriteRule ^memberData/$ RestController.php?action=memberData [nc,qsa]
 
 #for sales
 RewriteRule ^addBookSales/$ RestController.php?action=addBookSales [nc,qsa]
 RewriteRule ^salesDetails/$ RestController.php?action=salesDetails [nc,qsa]
 
-#RewriteRule ^mobile/list/([0-9]+)/$   RestController.php?view=single&id=$1 [nc,qsa]
+#for Transactions
+RewriteRule ^addTransaction/$ RestController.php?action=addTransaction [nc,qsa]
+RewriteRule ^viewTransaction/$ RestController.php?action=viewTransaction [nc,qsa]
+RewriteRule ^returnBook/$ RestController.php?action=returnBook [nc,qsa]

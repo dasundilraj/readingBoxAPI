@@ -78,4 +78,35 @@ class Member
 
         return $data;
     }
+
+    public function listOfMemberID($conn){              //for get list of member id in team leader view
+        $team_lead_id=$_POST['team_lead_id'];
+
+        $sql="SELECT memberid FROM member WHERE teamleader_NIC='$team_lead_id'";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data[]=array("member_id"=>$row['memberid']);
+        }
+
+        return $data;
+    }
+
+    public function memberData($conn){              //for get member data of particular member in system
+
+        $member_id=$_POST['member_id'];
+
+        $sql="SELECT * FROM member WHERE memberid='$member_id'";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data=array(
+                "member_ID"=>$row['memberid'],
+                "name"=>$row['firstname']." ".$row['lastname'],
+                "address"=>$row['address']
+            );
+        }
+        return $data;
+
+    }
 }
