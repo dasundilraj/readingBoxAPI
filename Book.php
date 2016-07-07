@@ -108,5 +108,38 @@ class Book
         return $data;
     }
 
+    public function allAvailableListOFBookID($conn){            //for get list of all book id in library which are available in library
+
+        $library_id=$_POST['library_id'];
+
+        $sql="SELECT bookid FROM book WHERE library_libraryid='$library_id' AND updated='1' AND status='Available' ";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data[]=array("book_id"=>$row['bookid']);
+        }
+
+        return $data;
+    }
+
+    public function getBookData($conn){         //for get data from particular book
+
+        $book_id=$_POST['bookid'];
+
+        $sql="SELECT * FROM book WHERE bookid='$book_id' ";
+        $result=mysqli_query($conn,$sql);
+
+        while($row=mysqli_fetch_array($result)){
+            $data=array(
+                "ISBN"=>$row['ISBN'],
+                "title"=>$row['title'],
+                "author_name"=>$row['author_name'],
+                "price"=>$row['price']
+            );
+        }
+
+        return $data;
+    }
+
 
 }
