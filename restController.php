@@ -58,6 +58,16 @@ if(isset($_GET['action'])){
             $restHandler->libraryData($conn);
             break;
 
+        //cases for Member in Library
+        case "addMember":                       //for add members in team leader view
+            $restHandler= new RestHandler();
+            $restHandler->addMember($conn);
+            break;
+        case "viewMembersTeamLead":             //for view members who are related to the team leader in team leader view
+            $restHandler=new RestHandler();
+            $restHandler->viewMemberTeamLead($conn);
+            break;
+
 
 
     }
