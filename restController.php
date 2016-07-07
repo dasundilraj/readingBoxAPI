@@ -47,6 +47,14 @@ if(isset($_GET['action'])){
             $restHandler= new RestHandler();
             $restHandler->libraryALLBookData($conn);
             break;
+        case "allListOFBookID":                 //for get all list of book id which are available in library
+            $restHandler= new RestHandler();
+            $restHandler->allAvailableListOFBookID($conn);
+            break;
+        case "bookData":
+            $restHandler= new RestHandler();
+            $restHandler->bookData($conn);
+            break;
 
         //cases for library
         case "listOfLibraryId":                 //for get list of library id in main admin view
@@ -68,7 +76,18 @@ if(isset($_GET['action'])){
             $restHandler->viewMemberTeamLead($conn);
             break;
 
+        //cases for sales
+        case "addBookSales":                    //for add book sales details into the system in team leader  view
+            $restHandler= new RestHandler();
+            $restHandler->addBookSales($conn);
+            break;
+        case "salesDetails":                    //for view sales details in team leader view
+            $restHandler= new RestHandler();
+            $restHandler->viewSalesDetails($conn);
+            break;
 
+
+        //cases for transactions
 
     }
 }

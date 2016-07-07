@@ -14,6 +14,8 @@ RewriteRule ^addBooks/$ RestController.php?action=addBooks [nc,qsa]
 RewriteRule ^addBooksTeamLead/$ RestController.php?action=addBooksTeamLead [nc,qsa]
 RewriteRule ^listOFBookIDNotUpdated/$ RestController.php?action=listOFBookIDNotUpdated [nc,qsa]
 RewriteRule ^libraryALLBookData/$ RestController.php?action=libraryALLBookData [nc,qsa]
+RewriteRule ^allListOFBookID/$ RestController.php?action=allListOFBookID [nc,qsa]
+RewriteRule ^bookData/$ RestController.php?action=bookData [nc,qsa]
 
 #for Library
 RewriteRule ^listOfLibraryId/$ RestController.php?action=listOfLibraryId [nc,qsa]
@@ -22,5 +24,9 @@ RewriteRule ^libraryData/$ RestController.php?action=libraryData [nc,qsa]
 #for members
 RewriteRule ^addMember/$ RestController.php?action=addMember [nc,qsa]
 RewriteRule ^viewMembersTeamLead/$ RestController.php?action=viewMembersTeamLead [nc,qsa]
+
+#for sales
+RewriteRule ^addBookSales/$ RestController.php?action=addBookSales [nc,qsa]
+RewriteRule ^salesDetails/$ RestController.php?action=salesDetails [nc,qsa]
 
 #RewriteRule ^mobile/list/([0-9]+)/$   RestController.php?view=single&id=$1 [nc,qsa]
