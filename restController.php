@@ -55,9 +55,17 @@ if(isset($_GET['action'])){
             $restHandler= new RestHandler();
             $restHandler->allAvailableListOFBookID($conn);
             break;
-        case "bookData":
+        case "bookData":                        //for get book data in particular library
             $restHandler= new RestHandler();
             $restHandler->bookData($conn);
+            break;
+        case "bookNotification":                //for get book notification for team leader view
+            $restHandler= new RestHandler();
+            $restHandler->bookNotification($conn);
+            break;
+        case "updateBook":                      //for update book data in team leader view
+            $restHandler= new RestHandler();
+            $restHandler->updateBookDetails($conn);
             break;
 
         //cases for library

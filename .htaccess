@@ -17,6 +17,8 @@ RewriteRule ^listOFBookIDNotUpdated/$ RestController.php?action=listOFBookIDNotU
 RewriteRule ^libraryALLBookData/$ RestController.php?action=libraryALLBookData [nc,qsa]
 RewriteRule ^allListOFBookID/$ RestController.php?action=allListOFBookID [nc,qsa]
 RewriteRule ^bookData/$ RestController.php?action=bookData [nc,qsa]
+RewriteRule ^bookNotification/$ RestController.php?action=bookNotification [nc,qsa]
+RewriteRule ^updateBook/$ RestController.php?action=updateBook [nc,qsa]
 
 #for Library
 RewriteRule ^listOfLibraryId/$ RestController.php?action=listOfLibraryId [nc,qsa]

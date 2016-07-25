@@ -287,7 +287,7 @@ class RestHandler extends SimpleRest
 
     }
 
-    function  bookData($conn){
+    function bookData($conn){
 
         $book= new Book();
         $rawData=$book->getBookData($conn);
@@ -316,7 +316,61 @@ class RestHandler extends SimpleRest
 
     }
 
+    function bookNotification($conn){                   //book notification for Team Leader View
+        $book= new Book();
+        $rawData=$book->getBookNotification($conn);
 
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
+
+    function updateBookDetails($conn){
+        $book= new Book();
+        $rawData=$book->updateBookDetails($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+
+    }
 
 
     /***************<<<<<<< Functions for LIBRARY >>>>>>>>*********************/
