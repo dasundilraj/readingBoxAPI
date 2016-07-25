@@ -29,6 +29,7 @@ RewriteRule ^addMember/$ RestController.php?action=addMember [nc,qsa]
 RewriteRule ^viewMembersTeamLead/$ RestController.php?action=viewMembersTeamLead [nc,qsa]
 RewriteRule ^listOfMemberID/$ RestController.php?action=listOfMemberID [nc,qsa]
 RewriteRule ^memberData/$ RestController.php?action=memberData [nc,qsa]
+RewriteRule ^updateMember/$ RestController.php?action=updateMember [nc,qsa]
 
 #for sales
 RewriteRule ^addBookSales/$ RestController.php?action=addBookSales [nc,qsa]

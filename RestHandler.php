@@ -344,7 +344,7 @@ class RestHandler extends SimpleRest
 
     }
 
-    function updateBookDetails($conn){
+    function updateBookDetails($conn){          //for update book data in team leader view
         $book= new Book();
         $rawData=$book->updateBookDetails($conn);
 
@@ -521,10 +521,37 @@ class RestHandler extends SimpleRest
 
     }
 
-    function  getMemberData($conn){
+    function getMemberData($conn){
 
         $member= new Member();
         $rawData=$member->memberData($conn);
+
+        if(empty($rawData)){
+            $statusCode = 404;
+            $rawData = array("query_result"=>"0");
+        }
+        else{
+            $statusCode = 200;
+        }
+
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];                  //get SERVER HEADER ACCEPT TYPE
+        $this ->setHttpHeaders($requestContentType, $statusCode);
+
+        if(strpos($requestContentType,'application/json') !== false){
+            $response = $this->encodeJson($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'text/html') !== false){
+            $response = $this->encodeHtml($rawData);
+            echo $response;
+        } else if(strpos($requestContentType,'application/xml') !== false){
+            $response = $this->encodeXml($rawData);
+            echo $response;
+        }
+    }
+
+    function updateMemberData($conn){
+        $member= new Member();
+        $rawData=$member->updateMember($conn);
 
         if(empty($rawData)){
             $statusCode = 404;

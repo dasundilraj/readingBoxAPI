@@ -109,4 +109,30 @@ class Member
         return $data;
 
     }
+
+    public function updateMember($conn){
+
+        $memberid=$_POST['memberid'];
+        $fname=$_POST['fname'];
+        $lname=$_POST['lname'];
+        $address=$_POST['address'];
+        $nic=$_POST['nic'];
+        $age=$_POST['age'];
+        $gender=$_POST['gender'];
+        $mobile=$_POST['mobile'];
+        $email=$_POST['email'];
+        //memberid, firstname, lastname, address, email, phone, age, joindate, teamleader_NIC, gender, member_nic, member_image
+        $sql="UPDATE member SET firstname='$fname',lastname='$lname', address='$address',email='$email',phone='$mobile',age='$age',gender='$gender',member_nic='$nic'
+                      WHERE memberid='$memberid' ";
+
+        if(mysqli_query($conn,$sql)){
+            $data=array("query_result"=>"1");
+        }
+        else{
+            $data=array("query_result"=>"0");
+        }
+
+        return $data;
+
+    }
 }

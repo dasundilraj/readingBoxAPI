@@ -91,9 +91,13 @@ if(isset($_GET['action'])){
             $restHandler= new RestHandler();
             $restHandler->listOfMemberID($conn);
             break;
-        case "memberData":
+        case "memberData":                      //for get member data
             $restHandler= new RestHandler();
             $restHandler->getMemberData($conn);
+            break;
+        case "updateMember":                    //for update member details
+            $restHandler= new RestHandler();
+            $restHandler->updateMemberData($conn);
             break;
 
         //cases for sales
